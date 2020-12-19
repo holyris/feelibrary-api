@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  api:
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
+      target: development
+    volumes:
+      - .:/usr/src/app
+    command: ["npm", "run", "start:dev"]
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+
+  database:
+    image: mysql
+    volumes:
+      - feelibrary-mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: feelibrary
+      MYSQL_USER: feelibrary
+      MYSQL_PASSWORD: feelibrary
+
+volumes:
+  feelibrary-mysql-data:
