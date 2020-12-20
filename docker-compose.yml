@@ -16,15 +16,16 @@ services:
 
   database:
     image: mysql
+    command: --default-authentication-plugin=mysql_native_password
     volumes:
       - feelibrary-mysql-data:/var/lib/mysql
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: feelibrary
-      MYSQL_USER: feelibrary
-      MYSQL_PASSWORD: feelibrary
+      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_USER: ${DATABASE_USER}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
 
 volumes:
   feelibrary-mysql-data:
