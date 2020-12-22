@@ -9,7 +9,9 @@ export class CreateUserTable1608473268775 implements MigrationInterface {
         {
           name: "id",
           type: "int",
-          isPrimary: true
+          isPrimary: true,
+          isGenerated: true,
+          generationStrategy: 'increment'
         },
         {
           name: "username",
@@ -25,11 +27,12 @@ export class CreateUserTable1608473268775 implements MigrationInterface {
         {
           name: "created_at",
           type: "timestamp",
-          default: "now()"
+          default: 'now()'
         },
         {
-          name: "updatedAt",
+          name: "updated_at",
           type: "timestamp",
+          default: 'now()'
         },
       ]
     }))

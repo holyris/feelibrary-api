@@ -14,10 +14,12 @@ export class User {
   @Exclude()
   password: string;
 
-  @CreateDateColumn()
+  @Exclude()
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @Exclude()
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
   constructor(partial: Partial<User>) {
