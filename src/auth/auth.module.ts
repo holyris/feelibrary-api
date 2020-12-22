@@ -12,9 +12,8 @@ import { AuthController } from './auth.controller';
   imports: [
     UsersModule,
     PassportModule,
-    JwtModule.register({      
-      secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: process.env.JWT_EXPIRE }
+    JwtModule.register({
+      secret: "" + process.env.JWT_SECRET,
     })],
   providers: [AuthService, LocalStrategy, JwtStrategy],
   exports: [AuthService],

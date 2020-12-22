@@ -1,4 +1,4 @@
-import { Controller, Post, UseGuards, Body, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
+import { Controller, Post, UseGuards, Body, UseInterceptors, ClassSerializerInterceptor, Request, ConflictException } from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { LoginUserDto } from 'src/users/dto/login-user.dto';
 import { AuthService } from './auth.service';
@@ -15,8 +15,8 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('login')
   @Public()
-  async login(@Body() loginUserDto:LoginUserDto) {
-    return this.authService.login(loginUserDto);
+  async login(@Request() req) {
+    return this.authService.login(req.user);
   }
 
   @Post('register')

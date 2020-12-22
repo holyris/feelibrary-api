@@ -13,19 +13,20 @@ export class AuthService {
     private jwtService: JwtService
   ) { }
 
-  async validateUser({ username, password }: LoginUserDto): Promise<User> {
+  async validateUser(username, password): Promise<User> {
     const user = await this.usersService.findOneByUsername(username);
     if (user) {
-      const isPasswordMatching = await argon2.verify(password, user.password);
+      const isPasswordMatching = await argon2.verify(user.password, password);
       if (isPasswordMatching) {
         return user;
       }
     }
   }
 
-  async login(user: LoginUserDto) {
+  async login(user) {
+    const payload = { id: user.id, username: user.username}
     return {
-      access_token: this.jwtService.sign(user),
+      access_token: this.jwtService.sign(payload, {expiresIn: process.env.JWT_EXPIRE}),
     };
   }
 
