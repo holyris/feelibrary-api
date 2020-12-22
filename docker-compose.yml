@@ -1,18 +1,18 @@
 version: "3"
 
 services:
-  api:
-    build:
-      context: ./
-      dockerfile: ./docker/Dockerfile
-      target: development
-    volumes:
-      - .:/usr/src/app
-    command: ["npm", "run", "start:dev"]
-    ports:
-      - "3000:3000"
-    depends_on:
-      - database
+  # api:
+  #   build:
+  #     context: ./
+  #     dockerfile: ./Dockerfile
+  #     target: development
+  #   volumes:
+  #     - .:/usr/src/app
+  #   # command: ["npm", "run", "start:dev"]
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - database
 
   database:
     image: mysql
@@ -20,7 +20,7 @@ services:
     volumes:
       - feelibrary-mysql-data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "${DATABASE_PORT}:${DATABASE_PORT}"
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DATABASE_NAME}

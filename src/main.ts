@@ -8,7 +8,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   setupSwagger(app);
-  await app.listen(3000);
+  await app.listen(Number(process.env.SERVER_PORT));
+
+  if (!Number(process.env.PRODUCTION)) {
+    console.log("Ready at http://localhost:" + process.env.SERVER_PORT + "/");
+  }
 }
 bootstrap();
 
