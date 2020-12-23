@@ -1,5 +1,5 @@
 import { Exclude } from "class-transformer";
-import { Feeling } from "src/feelings/feeling.entity";
+import { Feeling } from "src/modules/feelings/feeling.entity";
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()

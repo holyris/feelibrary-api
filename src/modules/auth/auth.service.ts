@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { LoginUserDto } from 'src/users/dto/login-user.dto';
-import { UsersService } from 'src/users/users.service';
-import { User } from 'src/users/user.entity';
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { LoginUserDto } from 'src/modules/users/dto/login-user.dto';
+import { UsersService } from 'src/modules/users/users.service';
+import { User } from 'src/modules/users/user.entity';
+import { CreateUserDto } from 'src/modules/users/dto/create-user.dto';
 import * as argon2 from 'argon2';
 
 @Injectable()

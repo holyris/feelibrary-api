@@ -1,6 +1,6 @@
 import { Controller, Post, UseGuards, Body, UseInterceptors, ClassSerializerInterceptor, Request, ConflictException } from '@nestjs/common';
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
-import { LoginUserDto } from 'src/users/dto/login-user.dto';
+import { CreateUserDto } from 'src/modules/users/dto/create-user.dto';
+import { LoginUserDto } from 'src/modules/users/dto/login-user.dto';
 import { AuthService } from './auth.service';
 import { Public } from './constants';
 import { LocalAuthGuard } from './local-auth.guard';

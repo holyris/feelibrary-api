@@ -1,7 +1,7 @@
 import { Exclude } from "class-transformer";
-import { Book } from "src/books/book.entity";
-import { User } from "src/users/user.entity";
-import { FeelingType } from "src/feeling-types/feeling-type.entity";
+import { Book } from "src/modules/books/book.entity";
+import { User } from "src/modules/users/user.entity";
+import { FeelingType } from "src/modules/feeling-types/feeling-type.entity";
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()

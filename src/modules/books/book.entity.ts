@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
-import { Feeling } from 'src/feelings/feeling.entity';
+import { Feeling } from 'src/modules/feelings/feeling.entity';
 import { FeelingProportionModel } from './models/feeling-proportion.model';
 
 @Entity()
