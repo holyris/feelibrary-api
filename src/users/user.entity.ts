@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import * as argon2 from 'argon2';
+import { Feeling } from 'src/feelings/feeling.entity';
 
 @Entity()
 export class User {
@@ -13,6 +14,9 @@ export class User {
   @Column({ nullable: false })
   @Exclude()
   password: string;
+
+  @OneToMany(() => Feeling, feeling => feeling.user)
+  feelings: Feeling[]
 
   @Exclude()
   @CreateDateColumn({ name: 'created_at' })
