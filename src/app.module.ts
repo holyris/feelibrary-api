@@ -9,12 +9,13 @@ import { UsersModule } from './modules/users/users.module';
 import { BooksModule } from './modules/books/books.module';
 import { FeelingsModule } from './modules/feelings/feelings.module';
 import { FeelingTypesModule } from './modules/feeling-types/feeling-types.module';
+import { MoviesModule } from './modules/movies/movies.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot(),
-    AuthModule, UsersModule, BooksModule, FeelingsModule, FeelingTypesModule],
+    AuthModule, UsersModule, BooksModule, FeelingsModule, FeelingTypesModule, MoviesModule],
   controllers: [],
   providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],
 })

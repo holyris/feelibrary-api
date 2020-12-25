@@ -3,6 +3,7 @@ import { Book } from "src/modules/books/book.entity";
 import { User } from "src/modules/users/user.entity";
 import { FeelingType } from "src/modules/feeling-types/feeling-type.entity";
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Movie } from "../movies/movie.entity";
 
 @Entity()
 export class Feeling {
@@ -14,6 +15,9 @@ export class Feeling {
 
   @ManyToOne(() => User, user => user.feelings)
   user: User;
+
+  @ManyToOne(() => Movie, movie => movie.feelings)
+  movie: Movie;
 
   @ManyToOne(() => Book, book => book.feelings)
   book: Book;
