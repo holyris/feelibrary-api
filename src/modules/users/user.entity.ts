@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import * as argon2 from 'argon2';
-import { Feeling } from 'src/modules/feelings/feeling.entity';
+import { Feeling } from '../feelings/feeling.entity';
 
 @Entity()
 export class User {

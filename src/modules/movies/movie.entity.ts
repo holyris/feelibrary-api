@@ -1,6 +1,6 @@
 import { Entity, Column, CreateDateColumn, UpdateDateColumn, OneToMany, PrimaryColumn } from 'typeorm';
 import { Exclude } from 'class-transformer';
-import { Feeling } from 'src/modules/feelings/feeling.entity';
+import { Feeling } from '../feelings/feeling.entity';
 
 @Entity()
 export class Movie {
@@ -24,6 +24,7 @@ export class Movie {
 
   @OneToMany(() => Feeling, feeling => feeling.movie)
   feelings: Feeling[]
+
 
   @Exclude()
   @CreateDateColumn({ name: 'created_at' })
