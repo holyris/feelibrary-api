@@ -1,19 +1,19 @@
 import { MigrationInterface, QueryRunner, TableForeignKey } from "typeorm";
 
-export class CreateBookIdFKToFeelingTable1608726121297 implements MigrationInterface {
+export class CreateFeelingTypeIdFKToFeelingTable1608993305366 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createForeignKey("feeling", new TableForeignKey({
-            columnNames: ["book_id"],
+            columnNames: ["feeling_type_id"],
             referencedColumnNames: ["id"],
-            referencedTableName: "book",
+            referencedTableName: "feeling_type",
             onDelete: "CASCADE"
         }));
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         const table = await queryRunner.getTable("feeling");
-        let foreignKey = table.foreignKeys.find(fk => fk.columnNames.indexOf("book_id") !== -1);
+        let foreignKey = table.foreignKeys.find(fk => fk.columnNames.indexOf("feeling_type_id") !== -1);
         await queryRunner.dropForeignKey("feeling", foreignKey);
     }
 

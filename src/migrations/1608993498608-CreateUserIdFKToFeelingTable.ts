@@ -1,6 +1,6 @@
-import { MigrationInterface, QueryRunner, TableForeignKey } from "typeorm";
+import {MigrationInterface, QueryRunner, TableForeignKey} from "typeorm";
 
-export class CreateUserIdFKToFeelingTable1608726077463 implements MigrationInterface {
+export class CreateUserIdFKToFeelingTable1608993498608 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createForeignKey("feeling", new TableForeignKey({
