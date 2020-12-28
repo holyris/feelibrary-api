@@ -13,7 +13,7 @@ import { AuthController } from './auth.controller';
     UsersModule,
     PassportModule,
     JwtModule.register({
-      secret: "" + process.env.JWT_SECRET,
+      secret: process.env.JWT_SECRET,
     })],
   providers: [AuthService, LocalStrategy, JwtStrategy],
   exports: [AuthService],
