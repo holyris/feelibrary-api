@@ -7,24 +7,20 @@ export class Movie {
   @PrimaryColumn()
   id: number;
 
-  @Column({unique: true})
-  tmdbId: number;
-
-  @Column({nullable:false})
+  @Column()
   title: string;
 
-  @Column()
+  @Column({ nullable: true })
   description: string;
 
-  @Column()
+  @Column({ nullable: true })
   releaseDate: Date;
 
-  @Column()
+  @Column({ nullable: true })
   image: string;
 
   @OneToMany(() => Feeling, feeling => feeling.movie)
   feelings: Feeling[]
-
 
   @Exclude()
   @CreateDateColumn({ name: 'created_at' })
