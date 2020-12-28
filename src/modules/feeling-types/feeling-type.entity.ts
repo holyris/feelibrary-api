@@ -1,6 +1,6 @@
 import { Exclude } from "class-transformer";
-import { Feeling } from "src/modules/feelings/feeling.entity";
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Feeling } from "../feelings/feeling.entity";
 
 @Entity()
 export class FeelingType {
@@ -21,7 +21,7 @@ export class FeelingType {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
-  constructor(partial: Partial<Feeling>) {
+  constructor(partial: Partial<FeelingType>) {
     Object.assign(this, partial);
   }
 
