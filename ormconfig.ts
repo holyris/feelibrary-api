@@ -10,5 +10,5 @@ module.exports = {
   cli: {
     "migrationsDir": "src/migrations"
   },
-  seeds: ['src/seeds/**/*{ts,.js}']
+  seeds: ['dist/src/seeds/*.js']
 };
