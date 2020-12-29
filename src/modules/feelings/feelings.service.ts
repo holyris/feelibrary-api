@@ -1,23 +1,26 @@
 import { ConflictException, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { MoviesService } from '../movies/movies.service';
+import { CreateFeelingDto } from './dto/create-feeling.dto';
 import { Feeling } from './feeling.entity';
 
 @Injectable()
 export class FeelingsService {
   constructor(
     @InjectRepository(Feeling)
-    private feelingRepository: Repository<Feeling>
+    private feelingRepository: Repository<Feeling>,
+    private moviesService: MoviesService
   ) { }
 
-  async create(createFeeling: unknown): Promise<Feeling> {
+  async create(createFeeling: CreateFeelingDto): Promise<Feeling> {
     const feeling = new Feeling(createFeeling);
-    return this.feelingRepository.save(feeling).catch(err => {
-      if (err.code === 'ER_DUP_ENTRY') {
-        throw new ConflictException(err.message);
-      } else {
-        throw new InternalServerErrorException('unhandled exception: ' + err)
+    if (feeling.movie) {
+      const movie = await this.moviesService.findOne(feeling.movie.id)
+      if (!movie) {
+        await this.moviesService.create(feeling.movie);
       }
-    });
+    }
+    return this.feelingRepository.save(feeling)
   }
 }
