@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import { Exclude } from 'class-transformer';
-import * as argon2 from 'argon2';
+import { hash } from 'argon2';
 import { Feeling } from '../feelings/feeling.entity';
 
 @Entity()
@@ -32,6 +32,6 @@ export class User {
 
   @BeforeInsert()
   async hashPassword() {
-    this.password = await argon2.hash(this.password);
+    this.password = await hash(this.password);
   }
 }
