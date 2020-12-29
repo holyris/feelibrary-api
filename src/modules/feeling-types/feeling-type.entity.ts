@@ -14,11 +14,11 @@ export class FeelingType {
   feelings: Feeling[];
 
   @Exclude()
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt: Date;
 
   @Exclude()
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn()
   updatedAt: Date;
 
   constructor(partial: Partial<FeelingType>) {
