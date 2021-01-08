@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm/dist/typeorm.module';
 import { Connection } from 'typeorm';
 import { AuthModule } from './modules/auth/auth.module';
@@ -9,6 +9,7 @@ import { UsersModule } from './modules/users/users.module';
 import { FeelingsModule } from './modules/feelings/feelings.module';
 import { FeelingTypesModule } from './modules/feeling-types/feeling-types.module';
 import { MoviesModule } from './modules/movies/movies.module';
+import { AllExceptionsFilter } from './filters/all-exceptions.filter';
 
 @Module({
   imports: [
@@ -16,7 +17,10 @@ import { MoviesModule } from './modules/movies/movies.module';
     TypeOrmModule.forRoot(),
     AuthModule, UsersModule, FeelingsModule, FeelingTypesModule, MoviesModule],
   controllers: [],
-  providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],
+  providers: [
+    { provide: APP_GUARD, useClass: JwtAuthGuard },
+    { provide: APP_FILTER, useClass: AllExceptionsFilter }
+  ],
 })
 export class AppModule {
   constructor(private connection: Connection) {
