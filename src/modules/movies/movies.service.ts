@@ -39,6 +39,21 @@ export class MoviesService {
     return new Promise((resolve) => { resolve(movies) });
   }
 
+  async searchByFeelings(feelings: number[]): Promise<Movie[]> {
+    return this.movieRepository.find({
+      join: {
+        alias: "movies",
+        leftJoin: {
+          feelings: "movies.feelings",
+          feelingType: "feelings.feelingType"
+        }
+      },
+      where: qb => {
+        qb.where('feelingType.id IN (:ids)', { ids: feelings })
+      }
+    })
+  }
+
   async create(createMovie: unknown): Promise<Movie> {
     const movie = new Movie(createMovie);
     return this.movieRepository.save(movie).catch(err => {

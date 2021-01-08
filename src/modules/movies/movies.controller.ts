@@ -11,17 +11,4 @@ export class MoviesController {
   constructor(
     private readonly moviesService: MoviesService
   ) { }
-
-  @Public()
-  @Get('search')
-  search(
-    @Query('query') query: string,
-    @Query('page') page: number,
-    @Query('language') language: string,
-    @Query('year') year: number
-
-  ): Promise<Movie[]> {
-    if(!query) throw new BadRequestException("Query 'query' is required");
-    return this.moviesService.search({query, page, language, year});
-  }
 }

@@ -10,12 +10,13 @@ import { FeelingsModule } from './modules/feelings/feelings.module';
 import { FeelingTypesModule } from './modules/feeling-types/feeling-types.module';
 import { MoviesModule } from './modules/movies/movies.module';
 import { AllExceptionsFilter } from './filters/all-exceptions.filter';
+import { SearchModule } from './modules/search/search.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot(),
-    AuthModule, UsersModule, FeelingsModule, FeelingTypesModule, MoviesModule],
+    AuthModule, UsersModule, FeelingsModule, FeelingTypesModule, MoviesModule, SearchModule],
   controllers: [],
   providers: [
     { provide: APP_GUARD, useClass: JwtAuthGuard },
