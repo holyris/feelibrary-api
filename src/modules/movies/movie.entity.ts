@@ -41,25 +41,28 @@ export class Movie {
   get feelingsProportion() {
     let feelingsProportion: FeelingProportionModel[] = [];
     let feelingsProportionMap = {};
-    for (const feeling of this.feelings) {
-      if (feelingsProportionMap[feeling.feelingType.id]) {
-        feelingsProportionMap[feeling.feelingType.id]++;
-      } else {
-        feelingsProportionMap[feeling.feelingType.id] = 1;
+    if (this.feelings) {
+
+      for (const feeling of this.feelings) {
+        if (feelingsProportionMap[feeling.feelingType.id]) {
+          feelingsProportionMap[feeling.feelingType.id]++;
+        } else {
+          feelingsProportionMap[feeling.feelingType.id] = 1;
+        }
       }
-    }
 
-    for (const property in feelingsProportionMap) {
-      feelingsProportion.push(new FeelingProportionModel({
-        feelingTypeId: Number(property),
-        amount: feelingsProportionMap[property],
-        proportion: feelingsProportionMap[property] / this.feelings.length
-      }))
-    }
+      for (const property in feelingsProportionMap) {
+        feelingsProportion.push(new FeelingProportionModel({
+          feelingTypeId: Number(property),
+          amount: feelingsProportionMap[property],
+          proportion: feelingsProportionMap[property] / this.feelings.length
+        }))
+      }
 
-    feelingsProportion.sort((a, b)=>{
-      return b.amount - a.amount
-    })
+      feelingsProportion.sort((a, b) => {
+        return b.amount - a.amount
+      })
+    }
 
     return feelingsProportion;
   }
