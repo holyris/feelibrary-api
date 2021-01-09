@@ -1,4 +1,4 @@
-import { ConflictException, HttpService, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { HttpService, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { URL } from 'url';
@@ -58,13 +58,7 @@ export class MoviesService {
 
   async create(createMovie: unknown): Promise<Movie> {
     const movie = new Movie(createMovie);
-    return this.movieRepository.save(movie).catch(err => {
-      if (err.code === 'ER_DUP_ENTRY') {
-        throw new ConflictException(err.message);
-      } else {
-        throw new InternalServerErrorException('unhandled exception: ' + err)
-      }
-    });
+    return this.movieRepository.save(movie);
   }
 
   async findOne(id: number) {

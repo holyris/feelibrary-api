@@ -1,4 +1,4 @@
-import { Body, ConflictException, Controller, Delete, InternalServerErrorException, Param, Post, Req } from "@nestjs/common";
+import { Body, Controller, Delete, Param, Post, Req } from "@nestjs/common";
 import { CreateFeelingDto } from "./dto/create-feeling.dto";
 import { DeleteFeelingDto } from "./dto/delete-feeling.dto";
 import { Feeling } from "./feeling.entity";
@@ -14,20 +14,14 @@ export class FeelingsController {
   @Post()
   create(@Req() req, @Body() createFeelingDto: CreateFeelingDto): Promise<Feeling> {
     createFeelingDto.user = req.user;
-    return this.feelingsService.create(createFeelingDto).catch(err => {
-      if (err.code === 'ER_DUP_ENTRY') {
-        throw new ConflictException(err.message);
-      } else {
-        throw new InternalServerErrorException('unhandled exception: ' + err)
-      }
-    });
+    return this.feelingsService.create(createFeelingDto);
   }
 
   @Delete(':id')
   deleteById(@Param('id') id: number) {
     return this.feelingsService.deleteById(id);
   }
-  
+
   @Delete()
   delete(@Req() req, @Body() deleteFeelingDto: DeleteFeelingDto) {
     deleteFeelingDto.userId = req.user.id;

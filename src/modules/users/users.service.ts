@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm/dist';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -13,13 +13,7 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     const user = new User(createUserDto);
-    return this.usersRepository.save(user).catch(err => {
-      if (err.code === 'ER_DUP_ENTRY') {
-        throw new ConflictException(err.message);
-      } else {
-        throw new InternalServerErrorException('unhandled exception: ' + err)
-      }
-    });
+    return this.usersRepository.save(user);
   }
 
   findAll(): Promise<User[]> {
