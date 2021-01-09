@@ -1,5 +1,6 @@
-import { Body, ConflictException, Controller, InternalServerErrorException, Post, Req } from "@nestjs/common";
+import { Body, ConflictException, Controller, Delete, InternalServerErrorException, Param, Post, Req } from "@nestjs/common";
 import { CreateFeelingDto } from "./dto/create-feeling.dto";
+import { DeleteFeelingDto } from "./dto/delete-feeling.dto";
 import { Feeling } from "./feeling.entity";
 import { FeelingsService } from "./feelings.service";
 
@@ -20,5 +21,16 @@ export class FeelingsController {
         throw new InternalServerErrorException('unhandled exception: ' + err)
       }
     });
+  }
+
+  @Delete(':id')
+  deleteById(@Param('id') id: number) {
+    return this.feelingsService.deleteById(id);
+  }
+  
+  @Delete()
+  delete(@Req() req, @Body() deleteFeelingDto: DeleteFeelingDto) {
+    deleteFeelingDto.userId = req.user.id;
+    return this.feelingsService.delete(deleteFeelingDto);
   }
 }
