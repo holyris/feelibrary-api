@@ -7,38 +7,7 @@
 	"item": [
 		{
 			"name": "movies",
-			"item": [
-				{
-					"name": "http://localhost:3000/movies/search?query=test&page=1",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/movies/search?query=test&page=1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"movies",
-								"search"
-							],
-							"query": [
-								{
-									"key": "query",
-									"value": "test"
-								},
-								{
-									"key": "page",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
+			"item": []
 		},
 		{
 			"name": "feelings",
@@ -50,7 +19,55 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"feelingType\": {\r\n        \"id\": 1\r\n    },\r\n    \"movie\": {\r\n        \"id\": 774096,\r\n        \"title\": \"oui M.\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"feelingType\": {\r\n        \"id\": 1\r\n    },\r\n    \"movie\": {\r\n        \"id\": 401123,\r\n        \"title\": \"Beta Test\",\r\n        \"description\": \"While testing the latest first person shooter from global game developer, Sentinel, video game champion Max Troy discovers the events happening within the game are being reflected in the real world. He soon determines that the game's protagonist is real-life Orson Creed, an ex-Sentinel employee who is being remotely controlled by the corporation for reasons unknown. As virtual and real worlds collide, Max and Creed must join forces to unravel the conspiracy before the game's sinister events escalate and overwhelm the city.\",\r\n        \"releaseDate\": \"2016-07-22\",\r\n        \"image\": \"/zKisJfMxpp0KfX4P3VyDrH0edg6.jpg\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/feelings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"feelings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteFeelingById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/feelings/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"feelings",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteFeeling",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"feelingTypeId\": 1,\r\n    \"movieId\": 401123\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -83,7 +100,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"test\",\r\n    \"password\": \"test\"\r\n}",
+							"raw": "{\r\n    \"username\": \"test2\",\r\n    \"password\": \"test2\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -123,7 +140,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"test\",\r\n    \"password\": \"test\"\r\n}",
+							"raw": "{\r\n    \"username\": \"test2\",\r\n    \"password\": \"test2\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -190,6 +207,67 @@
 							"port": "3000",
 							"path": [
 								"feeling_types"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "search",
+			"item": [
+				{
+					"name": "searchMovies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/search/movies?title=test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"search",
+								"movies"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "test"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchMoviesByFeelings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/search/movies?feelings=2&feelings=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"search",
+								"movies"
+							],
+							"query": [
+								{
+									"key": "feelings",
+									"value": "2"
+								},
+								{
+									"key": "feelings",
+									"value": "5"
+								}
 							]
 						}
 					},
