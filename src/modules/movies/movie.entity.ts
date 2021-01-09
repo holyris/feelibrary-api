@@ -37,25 +37,29 @@ export class Movie {
     return this.feelings ? this.feelings.length : 0;
   }
 
+  get feelingTypeAmounts(): Object {
+    let feelingTypeAmounts = {};
+    if (this.feelings) {
+      for (const feeling of this.feelings) {
+        if (feelingTypeAmounts[feeling.feelingType.id]) {
+          feelingTypeAmounts[feeling.feelingType.id]++;
+        } else {
+          feelingTypeAmounts[feeling.feelingType.id] = 1;
+        }
+      }
+    }
+    return feelingTypeAmounts;
+  }
+
   @Expose()
   get feelingsProportion() {
     let feelingsProportion: FeelingProportionModel[] = [];
-    let feelingsProportionMap = {};
     if (this.feelings) {
-
-      for (const feeling of this.feelings) {
-        if (feelingsProportionMap[feeling.feelingType.id]) {
-          feelingsProportionMap[feeling.feelingType.id]++;
-        } else {
-          feelingsProportionMap[feeling.feelingType.id] = 1;
-        }
-      }
-
-      for (const property in feelingsProportionMap) {
+      for (const property in this.feelingTypeAmounts) {
         feelingsProportion.push(new FeelingProportionModel({
           feelingTypeId: Number(property),
-          amount: feelingsProportionMap[property],
-          proportion: feelingsProportionMap[property] / this.feelings.length
+          amount: this.feelingTypeAmounts[property],
+          proportion: this.feelingTypeAmounts[property] / this.feelings.length
         }))
       }
 
@@ -69,5 +73,14 @@ export class Movie {
 
   constructor(partial: Partial<Movie>) {
     Object.assign(this, partial);
+  }
+
+  // Return the amount of feelings that matches feelingTypeIds
+  calculateFeelingsAmountByFeelingTypeIds(feelingTypeIds: number[]): number {
+    let feelingsAmount: number = 0;
+    for (let feelingTypeId of feelingTypeIds) {
+      feelingsAmount += this.feelingTypeAmounts[feelingTypeId]
+    }
+    return feelingsAmount;
   }
 }
