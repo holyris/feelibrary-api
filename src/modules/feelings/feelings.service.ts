@@ -15,12 +15,27 @@ export class FeelingsService {
 
   async create(createFeeling: CreateFeelingDto): Promise<Feeling> {
     const feeling = new Feeling(createFeeling);
+
     if (feeling.movie) {
+      const userMovieFeelingsCount = await this.feelingRepository.find(
+        {
+          where:
+          {
+            user: { id: createFeeling.user.id },
+            movie: { id: createFeeling.movie.id }
+          }
+        });
+
+      if (userMovieFeelingsCount.length < Number(process.env.MOVIE_FEELINGS_LIMIT)) {
       const movie = await this.moviesService.findOne(feeling.movie.id)
       if (!movie) {
         await this.moviesService.create(feeling.movie);
       }
-    }
     return this.feelingRepository.save(feeling)
+      } else {
+        throw new BadRequestException(`Cannot have more than ${process.env.MOVIE_FEELINGS_LIMIT} feelings for a movie`)
+      }
+    }
+  }
   }
 }
