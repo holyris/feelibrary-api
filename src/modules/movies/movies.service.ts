@@ -39,7 +39,7 @@ export class MoviesService {
     return new Promise((resolve) => { resolve(movies) });
   }
 
-  async searchByFeelings(feelings: number[]): Promise<Movie[]> {
+  async searchByFeelings(feelingTypeIds: number[]): Promise<Movie[]> {
     return this.movieRepository.find({
       join: {
         alias: "movies",
@@ -49,7 +49,9 @@ export class MoviesService {
         }
       },
       where: qb => {
-        qb.where('feelingType.id IN (:ids)', { ids: feelings })
+        for (let feelingTypeId of feelingTypeIds) {
+          qb.andWhere('feelingType.id = :id', { id: feelingTypeId })
+        }
       }
     })
   }
