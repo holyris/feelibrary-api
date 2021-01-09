@@ -5,7 +5,7 @@ import { Check, Column, CreateDateColumn, Entity, Index, ManyToOne, PrimaryGener
 import { Movie } from "../movies/movie.entity";
 
 @Entity()
-@Index("idx_feeling_user_movie_book", ["user", "movie", "feelingType"], {unique:true})
+@Index("idx_unique_user_movie_ftype", ["user", "movie", "feelingType"], {unique:true})
 export class Feeling {
   @PrimaryGeneratedColumn()
   id: number;
