@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Param, Post, Req } from "@nestjs/common";
+import { Body, ClassSerializerInterceptor, Controller, Delete, Param, Post, Req, UseInterceptors } from "@nestjs/common";
 import { CreateFeelingDto } from "./dto/create-feeling.dto";
 import { DeleteFeelingDto } from "./dto/delete-feeling.dto";
 import { Feeling } from "./feeling.entity";
@@ -6,6 +6,7 @@ import { FeelingsService } from "./feelings.service";
 
 
 @Controller('feelings')
+@UseInterceptors(ClassSerializerInterceptor)
 export class FeelingsController {
   constructor(
     private feelingsService: FeelingsService
