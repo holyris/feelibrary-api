@@ -1,10 +1,11 @@
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, ClassSerializerInterceptor, UseInterceptors } from '@nestjs/common';
 import { Controller, Get, Query } from '@nestjs/common';
 import { Public } from 'src/modules/auth/constants';
 import { MoviesService } from 'src/modules/movies/movies.service';
 
 @Public()
 @Controller('search')
+@UseInterceptors(ClassSerializerInterceptor)
 export class SearchController {
 
   constructor(
