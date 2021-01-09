@@ -40,7 +40,7 @@ export class MoviesService {
   }
 
   async searchByFeelings(feelingTypeIds: number[]): Promise<Movie[]> {
-    return this.movieRepository.find({
+    let movies = await this.movieRepository.find({
       join: {
         alias: "movies",
         leftJoin: {
@@ -54,6 +54,13 @@ export class MoviesService {
         }
       }
     })
+
+    // orders movies by amount of feelings matching feelingTypeIds (descending)
+    movies.sort((a, b) => {
+      return b.calculateFeelingsAmountByFeelingTypeIds(feelingTypeIds) - a.calculateFeelingsAmountByFeelingTypeIds(feelingTypeIds)
+    })
+
+    return movies
   }
 
   async create(createMovie: unknown): Promise<Movie> {
