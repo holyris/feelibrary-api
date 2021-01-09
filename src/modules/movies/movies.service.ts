@@ -2,7 +2,7 @@ import { HttpService, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { URL } from 'url';
-import { MovieSearchParams } from './models/movie-search-params.model';
+import { TmdbMovieSearchParams } from './models/movie-search-params.model';
 import { TmdbMovieModel } from './models/tmdb-movie.model';
 import { Movie } from './movie.entity';
 
@@ -16,7 +16,7 @@ export class MoviesService {
 
   async search(params: any): Promise<Movie[]> {
     const url = new URL(`${process.env.TMDB_API_URL}search/movie`)
-    url.search = new MovieSearchParams(params).toString();
+    url.search = new TmdbMovieSearchParams(params).toString();
     const searchResult = await this.httpService.get(url.toString()).toPromise().catch(err => {
       throw err;
     });

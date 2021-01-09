@@ -1,5 +1,5 @@
 
-export class MovieSearchParams {
+export class TmdbMovieSearchParams {
   query: string
   page: number
   language: string
@@ -7,7 +7,7 @@ export class MovieSearchParams {
   api_key: string = process.env.TMDB_API_KEY
 
 
-  constructor(partial: Partial<MovieSearchParams>) {
+  constructor(partial: Partial<TmdbMovieSearchParams>) {
     Object.assign(this, partial);
   }
 
