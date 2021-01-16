@@ -1,5 +1,5 @@
 import { Entity, Column, CreateDateColumn, UpdateDateColumn, OneToMany, PrimaryColumn } from 'typeorm';
-import { Exclude, Expose } from 'class-transformer';
+import { Exclude, Expose, Transform } from 'class-transformer';
 import { Feeling } from '../feelings/feeling.entity';
 import { FeelingProportionModel } from './models/feeling-proportion.model';
 
@@ -17,6 +17,7 @@ export class Movie {
   @Column({ nullable: true })
   releaseDate: Date;
 
+  @Transform(image => image ? process.env.TMDB_API_IMG_BASE_URL + "w500" + image : null)
   @Column({ nullable: true })
   image: string;
 
